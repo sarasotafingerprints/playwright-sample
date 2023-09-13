@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const { chromium } = require('playwright')
 const {expect} = require("expect");
 const cp = require('child_process');
@@ -11,8 +13,8 @@ const playwrightClientVersion = cp.execSync('npx playwright --version').toString
       'platform': 'Windows 10',
       'build': 'Playwright Single Build',
       'name': 'Playwright Sample Test',
-      'user': process.env.LT_USERNAME,
-      'accessKey': process.env.LT_ACCESS_KEY,
+      'user': 'mikesarasotafingerprints',
+      'accessKey': 'Jx7ybD7j7EDnqvenT9Be5rvp25ng9aBwYlq49gEdvXFIn97Q3F',
       'network': true,
       'video': true,
       'console': true,
