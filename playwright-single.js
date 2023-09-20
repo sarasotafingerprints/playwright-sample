@@ -1,4 +1,5 @@
-require('dotenv').config()
+require('dotenv').config();
+const { getPlaywrightVersion } = require('.node-modules/playwright-core/lib/utils');
 const { chromium } = require('playwright-extra')
 const stealth = require("puppeteer-extra-plugin-stealth")()
 chromium.use(stealth);
@@ -6,6 +7,9 @@ chromium.use(stealth);
 const {expect} = require("expect");
 const cp = require('child_process');
 const playwrightClientVersion = cp.execSync('npx playwright --version').toString().trim().split(' ')[1];
+console.log("playwrightClientVersion:", playwrightClientVersion);
+
+
 
 (async () => {
   const capabilities = {
@@ -32,23 +36,20 @@ const playwrightClientVersion = cp.execSync('npx playwright --version').toString
   })
 
   const page = await browser.newPage()
-  let url = "https://calendly.com/srqfingerprints/sarasota-fingerprints-appointment-walk-in/2023-09-20T19:15:00Z?first_name=Mike&last_name=Tester&email=mike@sarasotafingerprints.com";
+  let url = "https://calendly.com/srqfingerprints/sarasota-fingerprints-appointment-walk-in/2023-09-21T17:00:00Z?first_name=Mike&last_name=Tester&email=mike@sarasotafingerprints.com";
   await page.goto(url, { waitUntil: 'networkidle' });
 
   let element = await page.locator('BUTTON[type="submit"]');
-  console.log("after element");
-
   await element.click();
-  console.log("after click");
   
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(6000);
+  //await page.screenshot({ path: 'screenshot.png', fullPage: true });
   const title = await page.title();
-  console.log("after title:");
 
   console.log(title);
 
   try {
-    expect(title).toEqual('Enter Booking Details - Calendly')
+    expect(title).toEqual('Confirmed - Calendly');
     // Mark the test as completed or failed
     await page.evaluate(_ => {}, `lambdatest_action: ${JSON.stringify({ action: 'setTestStatus', arguments: { status: 'passed', remark: 'Title matched' } })}`)
     await teardown(page, browser)
