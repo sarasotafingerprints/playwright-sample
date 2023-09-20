@@ -16,9 +16,11 @@
     "@cucumber/cucumber": "^7.3.2",
     "@playwright/test": "^1.35.0",
     "expect": "^29.5.0",
-    "playwright": "^1.35.0"
+    "playwright": "^1.38.0"
   },
   "dependencies": {
-    "dotenv": "^16.3.1"
+    "dotenv": "^16.3.1",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   }
 }
