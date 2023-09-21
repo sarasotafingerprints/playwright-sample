@@ -1,18 +1,14 @@
 require('dotenv').config();
-const { getPlaywrightVersion } = require('.node-modules/playwright-core/lib/utils');
+
+const { getPlaywrightVersion } = require('playwright-core/lib/utils');
 const { chromium } = require('playwright-extra')
 const stealth = require("puppeteer-extra-plugin-stealth")()
 chromium.use(stealth);
 
 const {expect} = require("expect");
-const cp = require('child_process');
-const playwrightClientVersion = cp.execSync('npx playwright --version').toString().trim().split(' ')[1];
 
-const playWrightVersion = getPlaywrightVersion();
-console.log("playwrightClientVersion:", playwrightClientVersion);
-console.log("playWrightVersion:", playWrightVersion);
-
-
+const playWrightClientVersion = getPlaywrightVersion();
+console.log("playWrightClientVersion:", playWrightClientVersion);
 
 (async () => {
   const capabilities = {
