@@ -7,7 +7,10 @@ chromium.use(stealth);
 const {expect} = require("expect");
 const cp = require('child_process');
 const playwrightClientVersion = cp.execSync('npx playwright --version').toString().trim().split(' ')[1];
+
+const playWrightVersion = getPlaywrightVersion();
 console.log("playwrightClientVersion:", playwrightClientVersion);
+console.log("playWrightVersion:", playWrightVersion);
 
 
 
